@@ -1,0 +1,31 @@
+.dashboard-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.portfolio-card {
+    border: 1px solid #ddd;
+    padding: 30px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.dashboard-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.dashboard-buttons a, .dashboard-buttons button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-edit { background: #4a90e2; color: white; border: none; }
+.btn-preview { background: #50e3c2; color: white; border: none; }
+.btn-download { background: #f5a623; color: white; border: none; }
