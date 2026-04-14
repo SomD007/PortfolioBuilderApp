@@ -47,6 +47,7 @@ const PortfolioSchema = new mongoose.Schema({
     settings: {
         theme: {type: String, default: 'minimal'},
         primaryColor: {type: String, default: '#007bff' },
+        textColor: { type: String, default: '#333333' }, // Add this
         darkmode: {type: Boolean, default: false }
     },
 

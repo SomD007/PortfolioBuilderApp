@@ -54,6 +54,7 @@ exports.login = async(req, res) =>{
             { expiresIn: "1d"} // Token lasts 24 hours
 
         );
+        console.log(token);
         res.json({
             token,
             user: { id: user._id, username: user.username, email: user.email}

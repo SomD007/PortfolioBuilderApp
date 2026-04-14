@@ -44,7 +44,7 @@ const PortfolioForm = ({ data, setData, handleInfoChange }) => {
             <div className="form-section">
                 <h3>👤 Personal Information</h3>
                 <input name="fullname" value={data.personalInfo.fullname} onChange={handleInfoChange} placeholder="Full Name" />
-                <textarea name="bio" value={data.personalInfo.bio} onChange={handleInfoChange} placeholder="Short Bio" />
+                <textarea name="bio" value={data.personalInfo.bio} onChange={handleInfoChange} placeholder="Short Bio" rows="6" />
                 <div className="grid-2">
                     <input name="contactEmail" value={data.personalInfo.contactEmail} onChange={handleInfoChange} placeholder="Email" />
                     <input name="location" value={data.personalInfo.location} onChange={handleInfoChange} placeholder="Location" />
@@ -63,8 +63,8 @@ const PortfolioForm = ({ data, setData, handleInfoChange }) => {
                         <input placeholder="Degree" value={edu.degree} onChange={(e) => updateEducation(index, 'degree', e.target.value)} />
                         <input placeholder="Institution" value={edu.institution} onChange={(e) => updateEducation(index, 'institution', e.target.value)} />
                         <div className="grid-2">
-                            <input type="date" value={edu.startDate} onChange={(e) => updateEducation(index, 'startDate', e.target.value)} />
-                            <input type="date" value={edu.endDate} onChange={(e) => updateEducation(index, 'endDate', e.target.value)} />
+                            <input type="date" value={edu.startDate ? new Date(edu.startDate).toISOString().split('T')[0] : ''} onChange={(e) => updateEducation(index, 'startDate', e.target.value)} />
+                            <input type="date" value={edu.endDate ? new Date(edu.endDate).toISOString().split('T')[0] : ''} onChange={(e) => updateEducation(index, 'endDate', e.target.value)} />
                         </div>
                         <input placeholder="Percentage / Status" value={edu.percentage} onChange={(e) => updateEducation(index, 'percentage', e.target.value)} />
                     </div>
@@ -98,7 +98,7 @@ const PortfolioForm = ({ data, setData, handleInfoChange }) => {
                             <button type="button" className="btn-remove" onClick={() => removeItem(index, 'projects')}>Remove</button>
                         </div>
                         <input placeholder="Title" value={proj.title} onChange={(e) => updateProject(index, 'title', e.target.value)} />
-                        <textarea placeholder="Description" value={proj.description} onChange={(e) => updateProject(index, 'description', e.target.value)} />
+                        <textarea placeholder="Description" value={proj.description} onChange={(e) => updateProject(index, 'description', e.target.value)} rows="6" />
                         <input placeholder="GitHub Link" value={proj.githubLink} onChange={(e) => updateProject(index, 'githubLink', e.target.value)} />
                     </div>
                 ))}

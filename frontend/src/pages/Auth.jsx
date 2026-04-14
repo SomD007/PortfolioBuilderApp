@@ -4,6 +4,8 @@ import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
+
+  
   const [isLogin, setIsLogin] = useState(true); // Toggle state
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
   const { setToken, setUser } = useContext(AuthContext);

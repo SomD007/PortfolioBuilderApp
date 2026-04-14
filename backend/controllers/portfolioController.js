@@ -4,7 +4,7 @@ exports.portfolio = async (req, res) => {
     try {
         // req.user.id comes from your JWT auth middleware
         const portfolio = await Portfolio.findOne({ user: req.user.id });
-        if (!portfolio) return res.status(404).json({ msg: 'No portfolio found' });
+        if (!portfolio) return res.status(404).json({ msg: 'No portfolio found 1' });
         res.json(portfolio);
     } catch (err) {
         res.status(500).send('Server Error');
@@ -67,3 +67,10 @@ exports.getMyPortfolio = async (req, res) => {
         res.status(500).send("Server Error");
     }
 };
+
+
+exports.getPortfolioViaSlug = async (req, res) => {
+    const portfolio = await Portfolio.findOne({ slug: req.params.slug });
+    if (!portfolio) return res.status(404).json({ msg: 'Not found' });
+    res.json(portfolio);
+}

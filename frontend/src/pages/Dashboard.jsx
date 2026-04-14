@@ -12,10 +12,12 @@ const Dashboard = () => {
             try {
                 const res = await axios.get('http://localhost:5000/api/portfolios/me', {
                     headers: { 'x-auth-token': localStorage.getItem('token') }
+                    
                 });
+                console.log(localStorage.getItem('token'));
                 setPortfolio(res.data);
             } catch (err) {
-                console.log("No portfolio yet");
+                console.log(err,"No portfolio yet");
             }
             setLoading(false);
         };
