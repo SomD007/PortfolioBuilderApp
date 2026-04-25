@@ -17,11 +17,12 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use('/api/auth', authRouter);
 app.use('/api/portfolios', portfoliosRouter);
+app.use('/api/admin', require('./routes/admin'));
 
 
 
 // Test Route
-// app.get('/api/status', (req, res) => res.json({ status: "Server is Live" }));
+app.get('/api/status', (req, res) => res.json({ status: "Server is Live" }));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server on port ${PORT}`));

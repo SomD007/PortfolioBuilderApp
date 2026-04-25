@@ -21,6 +21,7 @@ const Auth = () => {
       if (isLogin) {
         localStorage.setItem('token', res.data.token); // Save Feature #1 JWT
         setToken(res.data.token);
+        
         setUser(res.data.user);
         alert("Login Successful!");
         navigate('/dashboard'); // Go to Feature #2 Dashboard
