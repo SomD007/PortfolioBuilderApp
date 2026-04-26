@@ -7,6 +7,7 @@ import Builder from "./pages/Builder.jsx";
 import Auth from "./pages/Auth.jsx" // Import your Login/Register page
 import ColdEmailForm from './pages/ColdEmailForm.jsx';
 import PortfolioView from "./pages/PortfolioView.jsx";
+import GlobalBanner from "./components/GlobalBanner.jsx";
 // Add these to the top of App.jsx
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -43,6 +44,7 @@ function App() {
     
 
     <Router>
+      <GlobalBanner />
       {/* Everything inside <Routes> will change based on the URL. 
          Everything outside (like a Navbar) would stay on every page.
       */}

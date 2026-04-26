@@ -110,14 +110,37 @@ const Builder = () => {
  * Defined outside Builder to prevent re-rendering/focus loss issues with color pickers
  */
 const ThemeSelector = ({ data, setData }) => {
-    const themes = [
+    const [availableTemplates, setAvailableTemplates] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchTemplates = async () => {
+            try {
+                // Fetch the list of templates marked as isAvailable: true
+                const res = await axios.get('http://localhost:5000/api/portfolios/templates');
+                setAvailableTemplates(res.data);
+            } catch (err) {
+                console.error("Error fetching templates:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchTemplates();
+    }, []);
+
+    const allThemes = [
         { id: 'dark', label: 'Dark Sidebar', accent: '#e94560' },
         { id: 'glass', label: 'Glassmorphism', accent: '#764ba2' },
         { id: 'minimal', label: 'Minimal Editorial', accent: '#3b3bf7' },
         { id: 'cyber', label: 'Cyberpunk', accent: '#00ff41' },
         { id: 'professional', label: 'Professional', accent: '#2c3e50' },
         { id: 'neumorphic', label: 'Soft Neumorphic', accent: '#4facfe' },
+        { id: 'modern', label: 'Modern Dark', accent: '#2c3e50' }, // Added modern as it was in our seed
     ];
+
+    // Filter themes: Only show those that exist in the backend AND are available
+    // If the list is empty (loading or error), we show nothing to be safe
+    const themesToShow = allThemes.filter(t => availableTemplates.some(at => at.name === t.id));
 
     // Helper to update settings object without wiping other data
     const updateSettings = (updates) => {
@@ -127,11 +150,22 @@ const ThemeSelector = ({ data, setData }) => {
         }));
     };
 
+    if (loading) return <div style={{ padding: '20px', color: '#888' }}>Checking available themes...</div>;
+    
+    // If no templates are available, show a warning
+    if (themesToShow.length === 0 && !loading) {
+        return (
+            <div style={{ padding: '20px', background: '#fff5f5', color: '#c53030', borderRadius: '12px' }}>
+                <p>⚠️ No templates are currently available. Please check back later.</p>
+            </div>
+        );
+    }
+
     return (
         <div style={{ padding: '20px', background: '#fff', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', marginBottom: '20px' }}>
             <label style={{ fontSize: '12px', fontWeight: 'bold', color: '#888', display: 'block', marginBottom: '10px' }}>Select Theme</label>
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '20px' }}>
-                {themes.map(t => (
+                {themesToShow.map(t => (
                     <button
                         key={t.id}
                         onClick={() => updateSettings({ theme: t.id, primaryColor: t.accent })}

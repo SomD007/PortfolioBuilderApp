@@ -48,4 +48,22 @@
 }
 
 .btn-ban { background: #ff4d4d; color: white; }
-.btn-view { background: #007bff; color: white; margin-right: 5px; }
+.btn-view { background: #007bff; color: white; }
+.btn-delete { background: #333; color: white; }
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-badge.active {
+    background: #e6fffa;
+    color: #2c7a7b;
+}
+
+.status-badge.banned {
+    background: #fff5f5;
+    color: #c53030;
+}
