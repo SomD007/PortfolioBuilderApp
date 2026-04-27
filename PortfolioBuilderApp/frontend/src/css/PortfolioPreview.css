@@ -1,0 +1,308 @@
+/* --- ROOT & RESET --- */
+:root {
+    --accent: #3b3bf7;
+    --accent-low: rgba(59, 59, 247, 0.2);
+}
+
+.preview-container {
+    width: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    scroll-behavior: smooth;
+}
+/* Custom Scrollbar for a cleaner look (Optional) */
+.preview-container::-webkit-scrollbar {
+    width: 6px;
+}
+.preview-container::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+}
+
+
+/* --- UTILITIES --- */
+.flex-between { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.empty-msg { font-style: italic; opacity: 0.5; font-size: 13px; }
+.stat { font-weight: bold; color: var(--accent); }
+
+/* --- THEME 1: DARK SIDEBAR --- */
+
+.skill-badge-dark { 
+    background: var(--accent); 
+    color: white; 
+    padding: 4px 10px; 
+    border-radius: 6px; 
+    font-size: 11px; 
+    margin: 3px; 
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+
+/* --- THEME 1: DARK SIDEBAR --- */
+/* --- THEME 1: DARK SIDEBAR (Street Lamp Edition) --- */
+.theme-dark { 
+    display: flex; 
+    min-height: 600px; 
+    background: #05070a; /* Darker night-sky black */
+    color: var(--text-main); 
+    position: relative;
+    overflow: hidden;
+}
+
+/* The Spotlight Layer */
+.spotlight-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: screen; /* Makes the yellow actually "light up" the text */
+}
+
+.sidebar-dark { 
+    width: 240px; 
+    /* Glassmorphism: semi-transparent so light passes through */
+    background: rgba(15, 23, 42, 0.7); 
+    padding: 40px 24px; 
+    flex-shrink: 0; 
+    border-right: 1px solid rgba(253, 224, 71, 0.2); /* Warm yellow border */
+    backdrop-filter: blur(12px); 
+    z-index: 2;
+}
+
+.content-dark { 
+    flex: 1; 
+    padding: 40px; 
+    overflow-y: auto; 
+    z-index: 2;
+    background: transparent;
+}
+
+.profile-name {
+    color: #fde047; /* Street lamp yellow */
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px rgba(253, 224, 71, 0.3);
+}
+
+.skill-badge-dark { 
+    background: rgba(253, 224, 71, 0.1); 
+    color: #fde047; 
+    padding: 4px 10px; 
+    border-radius: 4px; 
+    border: 1px solid rgba(253, 224, 71, 0.2);
+    font-size: 11px; 
+    margin: 3px; 
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.skill-badge-dark:hover {
+    background: #fde047;
+    color: #000;
+    box-shadow: 0 0 15px rgba(253, 224, 71, 0.5);
+}
+
+.preview-item {
+    background: rgba(30, 41, 59, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.preview-item:hover {
+    border-color: rgba(253, 224, 71, 0.3);
+    transform: translateY(-2px);
+}
+
+.github-link {
+    color: #fde047;
+    text-decoration: none;
+    font-size: 0.8rem;
+    border-bottom: 1px dashed #fde047;
+}
+
+.github-link:hover {
+    color: #fff;
+    border-bottom-style: solid;
+}
+
+.stat {
+    color: #fde047;
+    font-weight: bold;
+}
+
+/* Custom scrollbar for the dark theme */
+.content-dark::-webkit-scrollbar {
+    width: 6px;
+}
+.content-dark::-webkit-scrollbar-thumb {
+    background: rgba(240, 201, 6, 0.925);
+    border-radius: 10px;
+}
+
+
+/* --- THEME 2: GLASSMORPHISM --- */
+.theme-glass { 
+    padding: 30px; 
+    background: linear-gradient(135deg, #1e293b 0%, var(--accent) 100%); 
+    min-height: 100%;
+    color: var(--text-main); /* Ensure this is set */
+    background-attachment:fixed;
+    display: block; /* Ensure it flows vertically */
+}
+.glass-card { 
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(12px); 
+    border-radius: 20px; 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    padding: 25px; 
+    margin-bottom: 20px; 
+    /* color: white;  */
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.glass-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.glass-item { border-left: 2px solid rgba(255,255,255,0.3); padding-left: 15px; margin-bottom: 15px; }
+
+/* --- THEME 3: MINIMAL --- */
+.theme-minimal { background: #ffffff; padding: 60px; font-family: 'Inter', sans-serif; color: var(--text-main); /* Change from #1e293b */}
+.minimal-header h1 { font-size: 3rem; margin: 0; letter-spacing: -2px; }
+.minimal-bio { font-size: 1rem; line-height: 1.6; color: #64748b; margin: 30px 0; max-width: 800px; }
+.min-item { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #f1f5f9; }
+
+
+/* @keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal-item {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0; 
+} */
+
+/*Cursor Effect */
+
+.typing-container {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.typing-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 0.15em solid transparent; /* Hide default cursor */
+  animation: 
+    typing-process 2.5s steps(40, end) forwards;
+}
+
+/* The Black Block Cursor */
+.typing-container::after {
+  content: "";
+  display: inline-block;
+  width: 12px; /* Width of the cursor block */
+  height: 1.1em; /* Matches text height */
+  background-color: #000;
+  margin-left: 2px;
+  animation: 
+    move-cursor 2.5s steps(40, end) forwards,
+    blink-cursor 0.8s step-end infinite;
+}
+
+@keyframes typing-process {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes move-cursor {
+  from { opacity: 1; }
+  to { opacity: 1; } /* Keeps it visible during movement */
+}
+
+@keyframes blink-cursor {
+  from, to { background-color: transparent; }
+  50% { background-color: #000; }
+}
+
+/* --- THEME 4: CYBERPUNK --- */
+.theme-cyber { 
+    background: #000; 
+    padding: 40px; 
+    font-family: 'Courier New', monospace; 
+    border: 3px solid var(--accent);
+    background-image: linear-gradient(var(--accent-low) 1px, transparent 1px), linear-gradient(90deg, var(--accent-low) 1px, transparent 1px);
+    background-size: 25px 25px;
+    position: relative;
+}
+.cyber-glitch { color: var(--accent); text-transform: uppercase; letter-spacing: 5px; text-shadow: 2px 2px #ff00ff; }
+.cyber-terminal { background: rgba(0,0,0,0.9); border: 1px solid var(--accent); padding: 20px; margin: 20px 0; color: #00ff41; }
+.cyber-entry { border-left: 4px solid var(--accent); background: rgba(255,255,255,0.05); padding: 15px; margin-bottom: 15px; }
+
+/* --- THEME 5: PROFESSIONAL --- */
+.theme-prof { background: #fff; padding: 50px; font-family: 'Georgia', serif; color: var(--text-main); /* Change from #111 */
+}
+.prof-header { text-align: center; margin-bottom: 40px; }
+.prof-header h1 { font-size: 2.5rem; text-transform: uppercase; margin: 0; }
+.prof-body { display: grid; grid-template-columns: 1fr; gap: 30px; }
+.prof-item { border-top: 1px solid #000; padding-top: 10px; margin-bottom: 20px; }
+
+/* --- THEME 6: NEUMORPHIC --- */
+.theme-neu { background: #e0e0e0; padding: 40px; min-height: 100%; color: var(--text-main); /* Change from #444 */}
+.neu-card { 
+    background: #e0e0e0; 
+    border-radius: 30px; 
+    box-shadow: 12px 12px 24px #bebebe, -12px -12px 24px #ffffff; 
+    padding: 30px; 
+    margin-bottom: 25px; 
+}
+.neu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+
+/* Card animation */
+
+@keyframes extrude {
+    0% {
+        box-shadow: 0 0 0 #bebebe, 0 0 0 #ffffff;
+        transform: translateY(0);
+    }
+    100% {
+        box-shadow: 12px 12px 24px #bebebe, -12px -12px 24px #ffffff;
+        transform: translateY(-5px);
+    }
+}
+
+.neu-card {
+    animation: extrude 1.4s ease-out forwards;
+}
+
+/* --- GLOBAL ANIMATIONS --- */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+.cyber-scanline {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 2px;
+    background: rgba(255,255,255,0.1);
+    animation: scan 4s linear infinite;
+}
+@keyframes scan {
+    from { top: 0; }
+    to { top: 100%; }
+}
