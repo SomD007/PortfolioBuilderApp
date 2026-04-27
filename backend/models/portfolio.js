@@ -56,6 +56,10 @@ const PortfolioSchema = new mongoose.Schema({
         careerPersona: String, // Feature #16
         atsScore: Number,       // Feature #20
         aiRoastFeedback: String // Feature #24
+    },
+    isFeatured: {
+        type: Boolean,
+        default: false
     }
 
 }, { timestamps: true });

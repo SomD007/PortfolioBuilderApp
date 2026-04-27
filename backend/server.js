@@ -18,6 +18,7 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/api/auth', authRouter);
 app.use('/api/portfolios', portfoliosRouter);
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/notices', require('./routes/noticeRoutes'));
 
 
 

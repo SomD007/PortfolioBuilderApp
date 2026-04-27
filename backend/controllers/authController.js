@@ -53,6 +53,11 @@ exports.login = async(req, res) =>{
         console.log(user);
         if (!user) return res.status(400).json({msg: "Invalid Credentials" });
 
+        // 1.5 Check if Active (Soft Ban Feature)
+        if (user.isActive === false) {
+            return res.status(403).json({ msg: "Your account has been deactivated. Please contact support." });
+        }
+
         // 2. Compare Password
         const isMatch = await bcrypt.compare(password, user.password);
         console.log(isMatch); 

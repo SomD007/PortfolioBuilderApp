@@ -1,4 +1,5 @@
-const Portfolio = require("../models/portfolio"); // Ensure path to your model is correct
+const Portfolio = require("../models/portfolio");
+const Template = require("../models/Template");
 
 exports.portfolio = async (req, res) => {
     try {
@@ -17,6 +18,27 @@ exports.portfolio = async (req, res) => {
 exports.savePortfolio = async (req, res) => {
     try {
         const { personalInfo, education, skills, projects, settings, slug } = req.body;
+
+        // --- STRICT TEMPLATE VALIDATION ---
+        const requestedTheme = settings?.theme;
+        if (requestedTheme) {
+            const template = await Template.findOne({ name: requestedTheme });
+            
+            // 1. If the template doesn't exist in our managed list, block it
+            if (!template) {
+                return res.status(400).json({ 
+                    msg: "The selected theme is not recognized. Please choose a valid template." 
+                });
+            }
+
+            // 2. If the template is in maintenance mode, block it
+            if (template.isAvailable === false) {
+                return res.status(403).json({ 
+                    msg: template.maintenanceMessage || "This template is currently under maintenance. Please choose another one.",
+                    isMaintenance: true
+                });
+            }
+        }
 
         // Build portfolio object
         const portfolioFields = {
@@ -73,4 +95,15 @@ exports.getPortfolioViaSlug = async (req, res) => {
     const portfolio = await Portfolio.findOne({ slug: req.params.slug });
     if (!portfolio) return res.status(404).json({ msg: 'Not found' });
     res.json(portfolio);
+}
+
+exports.getFeaturedPortfolios = async (req, res) => {
+    try {
+        const portfolios = await Portfolio.find({ isFeatured: true })
+            .populate('user', ['username', 'email'])
+            .sort({ updatedAt: -1 });
+        res.json(portfolios);
+    } catch (err) {
+        res.status(500).send("Server Error");
+    }
 }
